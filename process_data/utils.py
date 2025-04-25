@@ -56,5 +56,10 @@ def get_train_test(fold):
     train_image_paths, train_labels, train_CaseIds = make_paths_and_labels(train_df)
     val_image_paths, val_labels, val_CaseIds = make_paths_and_labels(val_df)
 
-    return train_image_paths, val_image_paths, train_labels, val_labels, train_CaseIds, val_CaseIds
+    if any(item in set(val_CaseIds) for item in set(train_CaseIds)):
+        print("\tThere is overlap between training and testing data.")
+    else:
+        print("\tNo overlap between training and testing data.")
+
+    return train_image_paths, val_image_paths, train_labels, val_labels
 
